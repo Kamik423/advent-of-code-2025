@@ -39,7 +39,7 @@ def time[T](message: String)(block: => T): T =
 
 def wrap = (number: Int) => floorMod(number, 100)
 
-@main def aoc25x01(): Int =
+@main def aoc25x01(): Unit =
     val source = scala.io.Source.fromFile("inputs/01.txt")
     val lines =
         try source.getLines.toList
