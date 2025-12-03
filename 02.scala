@@ -34,7 +34,7 @@ def digits(number: Long): Long = log10(number).toLong + 1
       * @param amount
       *   The amount or repeats to scan
       */
-    def findRepeatsInIntervalNew(interval: Interval, amount: Int): List[Long] =
+    def findRepeatsInInterval(interval: Interval, amount: Int): List[Long] =
         // Let's determine the length of the number that can repeat.
         // For interval (1111-1212), amount=2 the length of the repeating segment is 2.
         // We take the total number of digits and divide it by the amount of repeats.
@@ -67,24 +67,27 @@ def digits(number: Long): Long = log10(number).toLong + 1
                   pow(10L, attemptedLength) - 1
                 ).toLong
                 // For the return we multiply it by the factor
-                (lowestMatch to highestMatch)
+                Range
+                    .Long(lowestMatch, highestMatch + 1L, 1L)
                     .map(_ * factor.toLong)
             )
             .flatten
             .toList
 
-    time("part1"):
-        intervals
-            .map(interval => findRepeatsInIntervalNew(interval, 2))
-            .flatten
-            .sum
+    // part one dump once. Somehow it is 30× faster the second time
+    for (i <- 1 to 2)
+        time(f"part1 Execution $i"):
+            intervals
+                .map(interval => findRepeatsInInterval(interval, 2))
+                .flatten
+                .sum
 
     time("part2"):
         intervals
             .map(interval =>
                 (2 to digits(interval.upper).toInt)
                     .map(amountOfRepeats =>
-                        findRepeatsInIntervalNew(interval, amountOfRepeats)
+                        findRepeatsInInterval(interval, amountOfRepeats)
                     )
                     .flatten
             )
