@@ -1,3 +1,5 @@
+package aoc25x03
+
 import aoc.time
 import math.{max}
 
@@ -15,7 +17,7 @@ import math.{max}
 def numConcatenate(list: Seq[Long]): Long =
     list.foldLeft(0L)((a, b) => 10L * a + b)
 
-@main def aoc25x03(): Unit =
+@main def main(): Unit =
     val source = scala.io.Source.fromFile("inputs/03.txt")
     val realInput =
         try source.mkString

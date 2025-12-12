@@ -1,3 +1,5 @@
+package aoc25x04
+
 import aoc.time
 
 enum CellState:
@@ -68,7 +70,7 @@ implicit class WorldWithCells(world: World):
       world.map(_.map(_.state.char).mkString).mkString("\n")
     )
 
-@main def aoc25x04(): Unit =
+@main def main(): Unit =
     val source = scala.io.Source.fromFile("inputs/04.txt")
     val realInput =
         try source.mkString

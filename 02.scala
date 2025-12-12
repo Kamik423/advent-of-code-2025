@@ -1,3 +1,5 @@
+package aoc25x02
+
 import aoc.time
 import math.{log10, pow, floor, ceil, max, min}
 
@@ -5,7 +7,7 @@ case class Interval(lower: Long, upper: Long)
 
 def digits(number: Long): Long = log10(number).toLong + 1
 
-@main def aoc25x02(): Unit =
+@main def main(): Unit =
     val source = scala.io.Source.fromFile("inputs/02.txt")
     val input =
         try source.mkString.filterNot(_.isWhitespace)
