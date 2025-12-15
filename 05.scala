@@ -37,11 +37,10 @@ case class Interval(lower: Long, upper: Long):
         intervals
             .sortBy(_.lower)
             .foldLeft(List[Interval]())((overlappedIntervals, interval) =>
-                if overlappedIntervals.isEmpty then
-                    println(interval); List(interval)
+                if overlappedIntervals.isEmpty then List(interval)
                 else
                     val lastInterval = overlappedIntervals.last
-                    if lastInterval.upper < interval.lower then
+                    if lastInterval.upper + 1 < interval.lower then
                         overlappedIntervals.appended(interval)
                     else if interval.upper <= lastInterval.upper then
                         overlappedIntervals
@@ -59,7 +58,7 @@ case class Interval(lower: Long, upper: Long):
     time("part1 again"):
         values.count(value => reducedIntervals.exists(_.contains(value)))
 
-    time("part2v2"):
+    time("part2.2v2"):
         intervals
             .sortBy(_.lower)
             .foldLeft((0L, Option.empty[Long]))((accumulator, interval) =>
